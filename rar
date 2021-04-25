@@ -50,18 +50,18 @@ dx=5
 dy=3
 
 ball = l = GameSprite2('wellness_ball_active_sitting_hero_3_3.jpg',350,350)
-l = GameSprite('12838980299.jpg',100,0)
-l1 = GameSprite1('12838980299.jpg',600,0)
+l = GameSprite('12838980299.jpg',100,350)
+l1 = GameSprite1('12838980299.jpg',600,350)
 while game:
     ball.rect.x +=dx
-    ball.rect.x -=dy
+    ball.rect.y -=dy
     if ball.rect.x > 650:
         dx *= -1
     if ball.rect.y < 0:
         dy *= -1
     if ball.rect.x < 0:
         dx *= -1
-    if ball.rect.y > 450:
+    if ball.rect.y > 650:
         dy *= -1
     
     window.fill((10,10,100))
@@ -73,7 +73,9 @@ while game:
     l1.reset()
     l1.dv()
     ball.reset()
-
-
+    if sprite.collide_rect(ball, l):
+        dx *= -1
+    if sprite.collide_rect(ball, l1):
+        dx *= -1
     clock.tick(30)
     display.update()
